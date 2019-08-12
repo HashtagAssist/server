@@ -202,35 +202,6 @@ class EmailProvider extends AbstractProvider {
 	}
 
 	/**
-	 * @param array $sortedByLanguage
-	 * @param IUser[] $users
-	 * @param string $defaultLanguage
-	 */
-	private function sortUsersByLanguage(array &$sortedByLanguage,
-										 array $users,
-										 string $defaultLanguage):void {
-		/**
-		 * @var array $sortedByLanguage
-		 * [
-		 *   'de' => ['a@b.com', 'c@d.com'],
-		 *   ...
-		 * ]
-		 */
-		foreach($users as $user) {
-			/** @var IUser $user */
-			$emailAddress = $user->getEMailAddress();
-			$lang = $this->config->getUserValue($user->getUID(),
-				'core', 'lang', $defaultLanguage);
-
-			if (!isset($sortedByLanguage[$lang])) {
-				$sortedByLanguage[$lang] = [];
-			}
-
-			$sortedByLanguage[$lang][] = $emailAddress;
-		}
-	}
-
-	/**
 	 * @param array $emails
 	 * @param string $defaultLanguage
 	 * @return array
