@@ -91,7 +91,7 @@ class BirthdayService {
 		$targetPrincipals[] = $book['principaluri'];
 		$datesToSync = [
 			['postfix' => '', 'field' => 'BDAY', 'symbol' => '*', 'utfSymbol' => '🎂'],
-			['postfix' => '-death', 'field' => 'DEATHDATE', 'symbol' => "†", 'utfSymbol' => '⚰️'],
+			['postfix' => '-death', 'field' => 'DEATHDATE', 'symbol' => "†", 'utfSymbol' => '†'],
 			['postfix' => '-anniversary', 'field' => 'ANNIVERSARY', 'symbol' => "⚭", 'utfSymbol' => '💍'],
 		];
 		foreach ($targetPrincipals as $principalUri) {
