@@ -97,7 +97,7 @@ class EmailProvider extends AbstractProvider {
 		$organizer = $this->getOrganizerEMailAndNameFromEvent($vevent);
 
 		foreach($sortedByLanguage as $lang => $emailAddresses) {
-			if ($this->hasL10NForLang($lang)) {
+			if (!$this->hasL10NForLang($lang)) {
 				$lang = $fallbackLanguage;
 			}
 			$l10n = $this->getL10NForLang($lang);
@@ -357,7 +357,7 @@ class EmailProvider extends AbstractProvider {
 			}
 		}
 
-		return array_unique($emailAddresses);
+		return $emailAddresses;
 	}
 
 	/**

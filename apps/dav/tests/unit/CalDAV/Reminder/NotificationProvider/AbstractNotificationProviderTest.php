@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 /**
  * @copyright Copyright (c) 2019, Thomas Citharel
  *
@@ -33,23 +34,23 @@ use Sabre\VObject\Component\VCalendar;
 
 abstract class AbstractNotificationProviderTest extends TestCase {
 
-    /** @var ILogger|\PHPUnit\Framework\MockObject\MockObject */
-    protected $logger;
+	/** @var ILogger|\PHPUnit\Framework\MockObject\MockObject */
+	protected $logger;
 
-    /** @var L10NFactory|\PHPUnit\Framework\MockObject\MockObject */
-    protected $l10nFactory;
+	/** @var L10NFactory|\PHPUnit\Framework\MockObject\MockObject */
+	protected $l10nFactory;
 
-    /** @var IL10N|\PHPUnit\Framework\MockObject\MockObject */
-    protected $l10n;
+	/** @var IL10N|\PHPUnit\Framework\MockObject\MockObject */
+	protected $l10n;
 
-    /** @var IURLGenerator|\PHPUnit\Framework\MockObject\MockObject */
-    protected $urlGenerator;
+	/** @var IURLGenerator|\PHPUnit\Framework\MockObject\MockObject */
+	protected $urlGenerator;
 
-    /** @var IConfig|\PHPUnit\Framework\MockObject\MockObject */
-    protected $config;
+	/** @var IConfig|\PHPUnit\Framework\MockObject\MockObject */
+	protected $config;
 
-    /** @var AbstractNotificationProvider|\PHPUnit\Framework\MockObject\MockObject */
-    protected $provider;
+	/** @var AbstractNotificationProvider|\PHPUnit\Framework\MockObject\MockObject */
+	protected $provider;
 
 	/**
 	 * @var VCalendar
@@ -69,19 +70,20 @@ abstract class AbstractNotificationProviderTest extends TestCase {
 	public function setUp() {
 		parent::setUp();
 
-        $this->logger = $this->createMock(ILogger::class);
-        $this->l10nFactory = $this->createMock(L10NFactory::class);
-        $this->l10n = $this->createMock(IL10N::class);
-        $this->urlGenerator = $this->createMock(IURLGenerator::class);
-        $this->config = $this->createMock(IConfig::class);
+		$this->logger = $this->createMock(ILogger::class);
+		$this->l10nFactory = $this->createMock(L10NFactory::class);
+		$this->l10n = $this->createMock(IL10N::class);
+		$this->urlGenerator = $this->createMock(IURLGenerator::class);
+		$this->config = $this->createMock(IConfig::class);
 
-        $this->vcalendar = new VCalendar();
+		$this->vcalendar = new VCalendar();
 		$this->vcalendar->add('VEVENT', [
 			'SUMMARY' => 'Fellowship meeting',
-			'DTSTART' => new \DateTime('2017-01-01 00:00:00') // 1483228800
-        ]);
+			'DTSTART' => new \DateTime('2017-01-01 00:00:00+00:00'), // 1483228800,
+			'UID' => 'uid1234',
+		]);
 		$this->calendarDisplayName = 'Personal';
 
-        $this->user = $this->createMock(IUser::class);
-    }
+		$this->user = $this->createMock(IUser::class);
+	}
 }
