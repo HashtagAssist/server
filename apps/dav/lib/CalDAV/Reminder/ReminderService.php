@@ -40,11 +40,11 @@ use Sabre\VObject\Recur\NoInstancesException;
 
 class ReminderService {
 
-    /** @var Backend */
-    private $backend;
+	/** @var Backend */
+	private $backend;
 
-    /** @var NotificationProviderManager */
-    private $notificationProviderManager;
+	/** @var NotificationProviderManager */
+	private $notificationProviderManager;
 
 	/** @var IUserManager */
 	private $userManager;
@@ -83,19 +83,19 @@ class ReminderService {
 	 * @param CalDavBackend $caldavBackend
 	 * @param ITimeFactory $timeFactory
 	 */
-    public function __construct(Backend $backend,
-                                NotificationProviderManager $notificationProviderManager,
+	public function __construct(Backend $backend,
+								NotificationProviderManager $notificationProviderManager,
 								IUserManager $userManager,
 								IGroupManager $groupManager,
 								CalDavBackend $caldavBackend,
 								ITimeFactory $timeFactory) {
-        $this->backend = $backend;
-        $this->notificationProviderManager = $notificationProviderManager;
+		$this->backend = $backend;
+		$this->notificationProviderManager = $notificationProviderManager;
 		$this->userManager = $userManager;
 		$this->groupManager = $groupManager;
 		$this->caldavBackend = $caldavBackend;
 		$this->timeFactory = $timeFactory;
-    }
+	}
 
 	/**
 	 * Process reminders to activate
@@ -103,12 +103,12 @@ class ReminderService {
 	 * @throws NotificationProvider\ProviderNotAvailableException
 	 * @throws NotificationTypeDoesNotExistException
 	 */
-    public function processReminders():void {
-        $reminders = $this->backend->getRemindersToProcess();
+	public function processReminders():void {
+		$reminders = $this->backend->getRemindersToProcess();
 
-        foreach($reminders as $reminder) {
-        	$vcalendar = $this->parseCalendarData($reminder['calendardata']);
-        	if (!$vcalendar) {
+		foreach($reminders as $reminder) {
+			$vcalendar = $this->parseCalendarData($reminder['calendardata']);
+			if (!$vcalendar) {
 				$this->backend->removeReminder($reminder['id']);
 				continue;
 			}
@@ -140,7 +140,7 @@ class ReminderService {
 
 			$this->deleteOrProcessNext($reminder, $vevent);
 		}
-    }
+	}
 
 	/**
 	 * @param string $action
@@ -175,7 +175,7 @@ class ReminderService {
 	/**
 	 * @param array $objectData
 	 */
-    private function onCalendarObjectCreate(array $objectData):void {
+	private function onCalendarObjectCreate(array $objectData):void {
 		/** @var VObject\Component\VCalendar $vcalendar */
 		$vcalendar = $this->parseCalendarData($objectData['calendardata']);
 		if (!$vcalendar) {

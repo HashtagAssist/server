@@ -165,9 +165,9 @@ class EmailProvider extends AbstractProvider {
 			$template->addBodyListItem((string) $vevent->DESCRIPTION, $l10n->t('Description:'),
 				$this->getAbsoluteImagePath('actions/more.svg'));
 		}
-    }
+	}
 
-    /**
+	/**
 	 * @param string $path
 	 * @return string
 	 */
